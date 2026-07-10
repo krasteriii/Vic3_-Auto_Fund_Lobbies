@@ -1,0 +1,104 @@
+# Auto Fund Lobbies - script values
+
+# ------------------------------------------------------------------
+# Influence thresholds required before creating one more fund_lobbies
+# pact, by target rank. The pact's base cost is 100 influence
+# (common/diplomatic_actions/30_fund_lobby.txt), multiplied by the
+# target rank's diplo_pact_cost (common/country_ranks/00_country_ranks.txt:
+# great power x2.0, major power x1.5, everything below x1.0 or less),
+# by the funder's infamy level (DIPLOMATIC_PACT_COST_MULT_FROM_* defines:
+# +25%/+50%/+100%) and by up to +50% from hostile lobby clout
+# (DIPLOMATIC_PACT_COST_LOBBY_CLOUT_MAX). The clout share cannot be read
+# from script, so a flat x1.5 safety margin is applied - overestimating
+# only delays a pact, while underestimating would cause create/cancel churn.
+# Evaluated in the scope of the automating country.
+# ------------------------------------------------------------------
+
+afl_pact_threshold_great_power = {
+	value = 200
+	if = {
+		limit = { infamy >= 100 }
+		multiply = 2.0
+	}
+	else_if = {
+		limit = { infamy >= 50 }
+		multiply = 1.5
+	}
+	else_if = {
+		limit = { infamy >= 25 }
+		multiply = 1.25
+	}
+	multiply = 1.5
+	add = var:afl_min_influence
+}
+
+afl_pact_threshold_major_power = {
+	value = 150
+	if = {
+		limit = { infamy >= 100 }
+		multiply = 2.0
+	}
+	else_if = {
+		limit = { infamy >= 50 }
+		multiply = 1.5
+	}
+	else_if = {
+		limit = { infamy >= 25 }
+		multiply = 1.25
+	}
+	multiply = 1.5
+	add = var:afl_min_influence
+}
+
+afl_pact_threshold_default = {
+	value = 100
+	if = {
+		limit = { infamy >= 100 }
+		multiply = 2.0
+	}
+	else_if = {
+		limit = { infamy >= 50 }
+		multiply = 1.5
+	}
+	else_if = {
+		limit = { infamy >= 25 }
+		multiply = 1.25
+	}
+	multiply = 1.5
+	add = var:afl_min_influence
+}
+
+# ------------------------------------------------------------------
+# How attractive a country is as a funding target.
+# this = candidate country, scope:afl_funder = the automating country
+# ------------------------------------------------------------------
+afl_fund_target_score = {
+	value = country_rank
+	if = {
+		limit = {
+			any_political_lobby = {
+				target = scope:afl_funder
+				OR = {
+					is_political_lobby_type = lobby_pro_country
+					is_political_lobby_type = lobby_pro_overlord
+				}
+			}
+		}
+		add = 100
+	}
+	if = {
+		limit = { is_subject_of = scope:afl_funder }
+		add = 50
+	}
+	if = {
+		limit = { is_in_same_power_bloc = scope:afl_funder }
+		add = 25
+	}
+}
+
+# Inverse of the target score: the least valuable funded country is
+# defunded first when influence drops below the protected reserve.
+afl_defund_priority = {
+	value = 0
+	subtract = afl_fund_target_score
+}

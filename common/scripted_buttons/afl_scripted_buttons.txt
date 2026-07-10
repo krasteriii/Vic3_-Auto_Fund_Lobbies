@@ -1,0 +1,100 @@
+# Auto Fund Lobbies - journal entry buttons
+# root = the country owning the journal entry
+
+afl_button_enable = {
+	name = "afl_button_enable"
+	desc = "afl_button_enable_desc"
+
+	visible = {
+		NOT = { has_variable = afl_enabled }
+	}
+
+	possible = {
+		has_dlc_feature = lobbies
+	}
+
+	effect = {
+		set_variable = afl_enabled
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+afl_button_disable = {
+	name = "afl_button_disable"
+	desc = "afl_button_disable_desc"
+
+	visible = {
+		has_variable = afl_enabled
+	}
+
+	effect = {
+		remove_variable = afl_enabled
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+afl_button_reserve_up = {
+	name = "afl_button_reserve_up"
+	desc = "afl_button_reserve_up_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		has_variable = afl_min_influence
+		var:afl_min_influence < 500
+	}
+
+	effect = {
+		change_variable = {
+			name = afl_min_influence
+			add = 50
+		}
+		clamp_variable = {
+			name = afl_min_influence
+			min = 50
+			max = 500
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
+afl_button_reserve_down = {
+	name = "afl_button_reserve_down"
+	desc = "afl_button_reserve_down_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		has_variable = afl_min_influence
+		var:afl_min_influence > 50
+	}
+
+	effect = {
+		change_variable = {
+			name = afl_min_influence
+			subtract = 50
+		}
+		clamp_variable = {
+			name = afl_min_influence
+			min = 50
+			max = 500
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}

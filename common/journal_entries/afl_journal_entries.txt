@@ -1,0 +1,60 @@
+# Auto Fund Lobbies - settings journal entry
+# Activates automatically for human players once Central Banking is
+# researched (the tech that unlocks the Fund Lobbies diplomatic action).
+# Never completes; acts as a permanent settings panel.
+
+je_auto_fund_lobbies = {
+	icon = "gfx/interface/icons/political_lobby_icons/lobby_pro.dds"
+
+	group = je_group_foreign_affairs
+
+	scripted_button = afl_button_enable
+	scripted_button = afl_button_disable
+	scripted_button = afl_button_reserve_down
+	scripted_button = afl_button_reserve_up
+
+	is_shown_when_inactive = {
+		is_player = yes
+		has_dlc_feature = lobbies
+	}
+
+	possible = {
+		has_technology_researched = central_banking
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_variable = afl_min_influence }
+			}
+			set_variable = {
+				name = afl_min_influence
+				value = 100
+			}
+		}
+	}
+
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_enabled
+				trigger = {
+					has_variable = afl_enabled
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_disabled
+			}
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			afl_weekly_update = yes
+		}
+	}
+
+	weight = 10
+
+	transferable = yes
+}

@@ -1,0 +1,13 @@
+﻿l_russian:
+ je_auto_fund_lobbies: "Автоматическое финансирование лобби"
+ je_auto_fund_lobbies_reason: "Пока автоматизация включена, [Concept('concept_influence','Влияние')] сверх защищённого резерва используется за рубежом: каждую неделю заключается один новый пакт «[concept_fund_lobbies]» с наиболее подходящей страной, укрепляя дружественные нам [Concept('concept_political_lobbies','политические лобби')].\n\nЕсли доступное [Concept('concept_influence','Влияние')] опускается ниже резерва, автоматические пакты расторгаются по одному в неделю, пока резерв не восстановится. Пакты, заключённые вручную, никогда не затрагиваются, а новые пакты заключаются только пока казна свободна от долгов и недельный баланс положителен.\n\nЗащищённый резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Влияния')] (настраивается от #v 50#! до #v 500#!)."
+ je_auto_fund_lobbies_status_enabled: "Автоматизация #P включена#! — защищённый резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Влияния')]"
+ je_auto_fund_lobbies_status_disabled: "Автоматизация #N выключена#! — защищённый резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Влияния')]"
+ afl_button_enable: "Включить автоматизацию"
+ afl_button_enable_desc: "Начать расходовать [Concept('concept_influence','Влияние')] сверх защищённого резерва на новые пакты «[concept_fund_lobbies]»."
+ afl_button_disable: "Выключить автоматизацию"
+ afl_button_disable_desc: "Прекратить заключать новые автоматические пакты. Существующие пакты сохраняются; их можно расторгнуть вручную на панели дипломатии."
+ afl_button_reserve_up: "Увеличить резерв (+50)"
+ afl_button_reserve_up_desc: "Увеличивает защищённый резерв [Concept('concept_influence','Влияния')] на #v 50#!, максимум до #v 500#!. Текущий резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Уменьшить резерв (-50)"
+ afl_button_reserve_down_desc: "Уменьшает защищённый резерв [Concept('concept_influence','Влияния')] на #v 50#!, минимум до #v 50#!. Текущий резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"

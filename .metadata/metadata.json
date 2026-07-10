@@ -1,0 +1,15 @@
+{
+	"name": "Auto Fund Lobbies",
+	"id": "",
+	"version": "1.0.0",
+	"tags": [
+		"Gameplay"
+	],
+	"supported_game_version": "1.13.*",
+	"short_description": "Automatically spends spare Influence on Fund Lobbies pacts, protecting a player-set Influence reserve (50-500) configured through a journal entry.",
+	"relationships": [],
+	"game_custom_data": {
+		"multiplayer_synchronized": true,
+		"replace_paths": []
+	}
+}

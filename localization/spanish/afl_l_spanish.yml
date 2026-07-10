@@ -1,0 +1,13 @@
+﻿l_spanish:
+ je_auto_fund_lobbies: "Financiación automática de lobbies"
+ je_auto_fund_lobbies_reason: "Mientras la automatización esté activada, la [concept_influence] disponible por encima de la reserva protegida se pone a trabajar en el extranjero: cada semana se crea un nuevo pacto de [concept_fund_lobbies] con el país más adecuado, reforzando los [concept_political_lobbies] favorables a nosotros.\n\nSi nuestra [concept_influence] disponible cae por debajo de la reserva, los pactos automáticos se cancelan uno por semana hasta restaurar la reserva. Los pactos creados manualmente nunca se tocan, y solo se crean pactos nuevos mientras el tesoro esté libre de deudas y con balance semanal positivo.\n\nReserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence] (ajustable de #v 50#! a #v 500#!)."
+ je_auto_fund_lobbies_status_enabled: "Automatización #P activada#! — reserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence]"
+ je_auto_fund_lobbies_status_disabled: "Automatización #N desactivada#! — reserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence]"
+ afl_button_enable: "Activar automatización"
+ afl_button_enable_desc: "Empezar a gastar la [concept_influence] disponible por encima de la reserva protegida en nuevos pactos de [concept_fund_lobbies]."
+ afl_button_disable: "Desactivar automatización"
+ afl_button_disable_desc: "Dejar de crear nuevos pactos automáticos. Los pactos existentes se conservan y pueden cancelarse manualmente desde el panel de Diplomacia."
+ afl_button_reserve_up: "Aumentar reserva (+50)"
+ afl_button_reserve_up_desc: "Aumenta la reserva protegida de [concept_influence] en #v 50#!, hasta un máximo de #v 500#!. Reserva actual: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Reducir reserva (-50)"
+ afl_button_reserve_down_desc: "Reduce la reserva protegida de [concept_influence] en #v 50#!, hasta un mínimo de #v 50#!. Reserva actual: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"

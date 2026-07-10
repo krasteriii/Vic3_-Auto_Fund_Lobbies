@@ -1,0 +1,13 @@
+﻿l_turkish:
+ je_auto_fund_lobbies: "Otomatik Lobi Fonlaması"
+ je_auto_fund_lobbies_reason: "Otomasyon açıkken, korunan rezervin üzerindeki [concept_influence] yurt dışında değerlendirilir: her hafta en uygun ülkeyle yeni bir “[concept_fund_lobbies]” paktı kurulur ve bize dost [Concept('concept_political_lobbies','siyasi lobiler')] güçlendirilir.\n\nKullanılabilir [concept_influence] rezervin altına düşerse, rezerv yeniden sağlanana dek otomatik paktlar haftada bir tane iptal edilir. Elle kurulan paktlara asla dokunulmaz; yeni paktlar yalnızca hazine borçsuzken ve haftalık denge artıdayken kurulur.\n\nKorunan rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence] (#v 50#! ile #v 500#! arasında ayarlanabilir)"
+ je_auto_fund_lobbies_status_enabled: "Otomasyon #P açık#! — korunan rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
+ je_auto_fund_lobbies_status_disabled: "Otomasyon #N kapalı#! — korunan rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
+ afl_button_enable: "Otomasyonu Aç"
+ afl_button_enable_desc: "Korunan rezervin üzerindeki [concept_influence], yeni “[concept_fund_lobbies]” paktlarına harcanmaya başlanır."
+ afl_button_disable: "Otomasyonu Kapat"
+ afl_button_disable_desc: "Yeni otomatik pakt kurulması durdurulur. Mevcut paktlar korunur ve Diplomasi ekranından elle iptal edilebilir."
+ afl_button_reserve_up: "Rezervi Artır (+50)"
+ afl_button_reserve_up_desc: "Korunan [concept_influence] rezervini #v 50#! artırır (en fazla #v 500#!). Mevcut rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Rezervi Azalt (-50)"
+ afl_button_reserve_down_desc: "Korunan [concept_influence] rezervini #v 50#! azaltır (en az #v 50#!). Mevcut rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"

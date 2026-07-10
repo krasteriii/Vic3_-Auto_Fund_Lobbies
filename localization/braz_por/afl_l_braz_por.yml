@@ -1,0 +1,13 @@
+﻿l_braz_por:
+ je_auto_fund_lobbies: "Financiamento Automático de Lobbies"
+ je_auto_fund_lobbies_reason: "Enquanto a automação estiver ativada, a [concept_influence] disponível acima da reserva protegida é posta a trabalhar no exterior: a cada semana, um novo pacto de [concept_fund_lobbies] é criado com o país mais adequado, fortalecendo [concept_political_lobbies] favoráveis a nós.\n\nSe a nossa [concept_influence] disponível cair abaixo da reserva, os pactos automáticos são cancelados um por semana até a reserva ser restaurada. Pactos criados manualmente nunca são afetados, e novos pactos só são criados enquanto o tesouro estiver livre de dívidas e com saldo semanal positivo.\n\nReserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence] (ajustável de #v 50#! a #v 500#!)."
+ je_auto_fund_lobbies_status_enabled: "Automação #P ativada#! — reserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence]"
+ je_auto_fund_lobbies_status_disabled: "Automação #N desativada#! — reserva protegida: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! de [concept_influence]"
+ afl_button_enable: "Ativar Automação"
+ afl_button_enable_desc: "Começar a gastar a [concept_influence] disponível acima da reserva protegida em novos pactos de [concept_fund_lobbies]."
+ afl_button_disable: "Desativar Automação"
+ afl_button_disable_desc: "Parar de criar novos pactos automáticos. Os pactos existentes são mantidos e podem ser cancelados manualmente no painel de Diplomacia."
+ afl_button_reserve_up: "Aumentar Reserva (+50)"
+ afl_button_reserve_up_desc: "Aumenta a reserva protegida de [concept_influence] em #v 50#!, até o máximo de #v 500#!. Reserva atual: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Reduzir Reserva (-50)"
+ afl_button_reserve_down_desc: "Reduz a reserva protegida de [concept_influence] em #v 50#!, até o mínimo de #v 50#!. Reserva atual: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"

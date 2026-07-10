@@ -1,0 +1,13 @@
+﻿l_polish:
+ je_auto_fund_lobbies: "Automatyczne finansowanie lobby"
+ je_auto_fund_lobbies_reason: "Dopóki automatyzacja jest włączona, [Concept('concept_influence','Wpływ')] powyżej chronionej rezerwy jest wykorzystywany za granicą: co tydzień zawierany jest jeden nowy pakt „[concept_fund_lobbies]” z najodpowiedniejszym państwem, co wzmacnia przychylne nam [Concept('concept_political_lobbies','lobby polityczne')].\n\nJeśli dostępny [Concept('concept_influence','Wpływ')] spadnie poniżej rezerwy, automatyczne pakty są anulowane po jednym na tydzień, aż rezerwa zostanie odtworzona. Pakty zawarte ręcznie nigdy nie są naruszane, a nowe pakty powstają tylko wtedy, gdy skarb jest wolny od długów, a tygodniowy bilans dodatni.\n\nChroniona rezerwa: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Wpływu')] (regulowana od #v 50#! do #v 500#!)."
+ je_auto_fund_lobbies_status_enabled: "Automatyzacja #P włączona#! — chroniona rezerwa: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Wpływu')]"
+ je_auto_fund_lobbies_status_disabled: "Automatyzacja #N wyłączona#! — chroniona rezerwa: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [Concept('concept_influence','Wpływu')]"
+ afl_button_enable: "Włącz automatyzację"
+ afl_button_enable_desc: "Zacznij przeznaczać [Concept('concept_influence','Wpływ')] powyżej chronionej rezerwy na nowe pakty „[concept_fund_lobbies]”."
+ afl_button_disable: "Wyłącz automatyzację"
+ afl_button_disable_desc: "Przestań zawierać nowe automatyczne pakty. Istniejące pakty pozostają i można je anulować ręcznie w panelu dyplomacji."
+ afl_button_reserve_up: "Zwiększ rezerwę (+50)"
+ afl_button_reserve_up_desc: "Zwiększa chronioną rezerwę [Concept('concept_influence','Wpływu')] o #v 50#!, maksymalnie do #v 500#!. Obecna rezerwa: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Zmniejsz rezerwę (-50)"
+ afl_button_reserve_down_desc: "Zmniejsza chronioną rezerwę [Concept('concept_influence','Wpływu')] o #v 50#!, minimalnie do #v 50#!. Obecna rezerwa: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"

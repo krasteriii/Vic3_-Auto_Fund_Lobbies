@@ -1,0 +1,135 @@
+# Auto Fund Lobbies - scripted effects
+
+# Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse.
+# root = the country owning the journal entry.
+afl_weekly_update = {
+	# Country variables do not follow the journal entry through revolutions
+	# or tag switches, so restore the default reserve if it is missing.
+	if = {
+		limit = {
+			NOT = { has_variable = afl_min_influence }
+		}
+		set_variable = {
+			name = afl_min_influence
+			value = 100
+		}
+	}
+
+	if = {
+		limit = {
+			has_variable = afl_enabled
+			is_ai = no
+			has_dlc_feature = lobbies
+		}
+		save_temporary_scope_as = afl_funder
+
+		# 1) Forget tracked pacts that already broke on their own
+		#    (war, relations, rank loss, default...).
+		every_in_list = {
+			variable = afl_funded_countries
+			limit = {
+				NOT = {
+					has_diplomatic_pact = {
+						who = scope:afl_funder
+						type = fund_lobbies
+						is_initiator = no
+					}
+				}
+			}
+			save_temporary_scope_as = afl_stale_entry
+			scope:afl_funder = {
+				remove_list_variable = {
+					name = afl_funded_countries
+					target = scope:afl_stale_entry
+				}
+			}
+		}
+
+		# 2) Below the protected reserve: cancel the least valuable
+		#    automated pact, one per week. Manually created pacts are
+		#    never in the list, so they are never touched.
+		if = {
+			limit = { influence < var:afl_min_influence }
+			ordered_in_list = {
+				variable = afl_funded_countries
+				order_by = afl_defund_priority
+				position = 0
+				save_temporary_scope_as = afl_defund_target
+			}
+			if = {
+				limit = { exists = scope:afl_defund_target }
+				remove_diplomatic_pact = {
+					country = scope:afl_defund_target
+					type = fund_lobbies
+				}
+				remove_list_variable = {
+					name = afl_funded_countries
+					target = scope:afl_defund_target
+				}
+			}
+		}
+
+		# 3) Comfortably above the reserve: fund lobbies in the best new
+		#    target, one pact per week. The pact also transfers money, so
+		#    only spend while the treasury is healthy (mirrors the checks
+		#    the vanilla AI uses before proposing fund_lobbies).
+		else_if = {
+			limit = {
+				has_technology_researched = central_banking
+				NOT = { is_country_type = decentralized }
+				is_revolutionary = no
+				in_default = no
+				scaled_debt <= 0
+				net_fixed_income > 0
+			}
+			set_variable = {
+				name = afl_threshold_gp
+				value = afl_pact_threshold_great_power
+			}
+			set_variable = {
+				name = afl_threshold_mp
+				value = afl_pact_threshold_major_power
+			}
+			set_variable = {
+				name = afl_threshold_lp
+				value = afl_pact_threshold_default
+			}
+			ordered_country = {
+				limit = {
+					afl_valid_fund_target = yes
+					OR = {
+						AND = {
+							country_rank >= rank_value:great_power
+							scope:afl_funder = { influence >= var:afl_threshold_gp }
+						}
+						AND = {
+							country_rank = rank_value:major_power
+							scope:afl_funder = { influence >= var:afl_threshold_mp }
+						}
+						AND = {
+							country_rank < rank_value:major_power
+							scope:afl_funder = { influence >= var:afl_threshold_lp }
+						}
+					}
+				}
+				order_by = afl_fund_target_score
+				position = 0
+				save_temporary_scope_as = afl_fund_target
+			}
+			if = {
+				limit = { exists = scope:afl_fund_target }
+				create_diplomatic_pact = {
+					country = scope:afl_fund_target
+					type = fund_lobbies
+				}
+				add_to_variable_list = {
+					name = afl_funded_countries
+					target = scope:afl_fund_target
+				}
+			}
+			remove_variable = afl_threshold_gp
+			remove_variable = afl_threshold_mp
+			remove_variable = afl_threshold_lp
+		}
+	}
+}

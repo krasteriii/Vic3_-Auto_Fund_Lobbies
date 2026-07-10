@@ -1,0 +1,13 @@
+﻿l_german:
+ je_auto_fund_lobbies: "Automatische Lobbyfinanzierung"
+ je_auto_fund_lobbies_reason: "Solange die Automatisierung aktiviert ist, wird verfügbarer [concept_influence] oberhalb der geschützten Reserve im Ausland eingesetzt: Jede Woche wird ein neuer „[concept_fund_lobbies]“-Pakt mit dem geeignetsten Land geschlossen, wodurch uns wohlgesonnene [concept_political_lobbies] gestärkt werden.\n\nFällt unser verfügbarer [concept_influence] unter die Reserve, werden automatische Pakte einer pro Woche aufgelöst, bis die Reserve wiederhergestellt ist. Manuell geschlossene Pakte werden nie angetastet, und neue Pakte werden nur geschlossen, solange die Staatskasse schuldenfrei ist und die Wochenbilanz positiv ausfällt.\n\nGeschützte Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence] (einstellbar von #v 50#! bis #v 500#!)."
+ je_auto_fund_lobbies_status_enabled: "Automatisierung #P aktiviert#! — geschützte Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
+ je_auto_fund_lobbies_status_disabled: "Automatisierung #N deaktiviert#! — geschützte Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
+ afl_button_enable: "Automatisierung aktivieren"
+ afl_button_enable_desc: "Beginnt, verfügbaren [concept_influence] oberhalb der geschützten Reserve für neue „[concept_fund_lobbies]“-Pakte auszugeben."
+ afl_button_disable: "Automatisierung deaktivieren"
+ afl_button_disable_desc: "Es werden keine neuen automatischen Pakte mehr geschlossen. Bestehende Pakte bleiben erhalten und können manuell über das Diplomatiemenü aufgelöst werden."
+ afl_button_reserve_up: "Reserve erhöhen (+50)"
+ afl_button_reserve_up_desc: "Erhöht die geschützte [concept_influence]-Reserve um #v 50#!, bis zu einem Maximum von #v 500#!. Aktuelle Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_reserve_down: "Reserve verringern (-50)"
+ afl_button_reserve_down_desc: "Verringert die geschützte [concept_influence]-Reserve um #v 50#!, bis zu einem Minimum von #v 50#!. Aktuelle Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
