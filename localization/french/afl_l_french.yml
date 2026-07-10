@@ -14,7 +14,7 @@
  afl_button_run_now: "Vérifier maintenant"
  afl_button_run_now_desc: "Exécute immédiatement une vérification de l'automatisation, sans attendre le prochain cycle hebdomadaire. Survolez pour voir exactement ce qui sera fait."
  fund_lobbies_effect_desc_first: "Conclure un pacte « [concept_fund_lobbies] »"
- je_auto_fund_lobbies_status_created: "Automatisation #P activée#! — la dernière vérification a conclu un nouveau pacte."
+ je_auto_fund_lobbies_status_created: "Automatisation #P activée#! — la dernière vérification a conclu un nouveau pacte avec [ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName]."
  je_auto_fund_lobbies_status_stuck: "Automatisation #P activée#! — une cible valide a été trouvée, mais le pacte n'a pas pu être conclu. Merci de signaler ce problème."
  je_auto_fund_lobbies_status_defunded: "Automatisation #P activée#! — un pacte a été annulé pour rétablir la réserve protégée."
  je_auto_fund_lobbies_status_cantafford: "Automatisation #P activée#! — des pays éligibles existent, mais l'[concept_influence] disponible est sous le seuil pour chacun d'eux."

@@ -14,7 +14,7 @@
  afl_button_run_now: "Comprobar ahora"
  afl_button_run_now_desc: "Ejecuta inmediatamente una comprobación de la automatización, sin esperar al siguiente ciclo semanal. Pasa el cursor para ver exactamente qué hará."
  fund_lobbies_effect_desc_first: "Establecer un pacto de [concept_fund_lobbies]"
- je_auto_fund_lobbies_status_created: "Automatización #P activada#! — la última comprobación estableció un nuevo pacto."
+ je_auto_fund_lobbies_status_created: "Automatización #P activada#! — la última comprobación estableció un nuevo pacto con [ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName]."
  je_auto_fund_lobbies_status_stuck: "Automatización #P activada#! — se encontró un objetivo válido, pero el pacto no pudo crearse. Por favor, informa de este problema."
  je_auto_fund_lobbies_status_defunded: "Automatización #P activada#! — se canceló un pacto para restaurar la reserva protegida."
  je_auto_fund_lobbies_status_cantafford: "Automatización #P activada#! — existen países elegibles, pero la [concept_influence] disponible está por debajo del umbral para todos ellos."

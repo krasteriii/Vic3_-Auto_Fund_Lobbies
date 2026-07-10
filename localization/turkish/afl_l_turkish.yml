@@ -14,7 +14,7 @@
  afl_button_run_now: "Şimdi Denetle"
  afl_button_run_now_desc: "Haftalık döngüyü beklemeden otomasyon denetimini hemen bir kez çalıştırır. Tam olarak ne yapılacağını görmek için imleci üzerine getirin."
  fund_lobbies_effect_desc_first: "“[concept_fund_lobbies]” paktı kur"
- je_auto_fund_lobbies_status_created: "Otomasyon #P açık#! — son denetim yeni bir pakt kurdu."
+ je_auto_fund_lobbies_status_created: "Otomasyon #P açık#! — son denetim yeni bir pakt kurdu: [ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName]"
  je_auto_fund_lobbies_status_stuck: "Otomasyon #P açık#! — geçerli bir hedef bulundu ancak pakt kurulamadı. Lütfen bu sorunu bildirin."
  je_auto_fund_lobbies_status_defunded: "Otomasyon #P açık#! — korunan rezervi geri kazanmak için bir pakt iptal edildi."
  je_auto_fund_lobbies_status_cantafford: "Otomasyon #P açık#! — uygun ülkeler var ancak kullanılabilir [concept_influence] hiçbirinin eşiğine yetmiyor."

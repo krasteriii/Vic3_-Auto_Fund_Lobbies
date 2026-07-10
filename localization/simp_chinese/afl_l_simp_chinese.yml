@@ -14,7 +14,7 @@
  afl_button_run_now: "立即检查"
  afl_button_run_now_desc: "立即执行一次自动化检查，无需等待每周结算。悬停可预览将要执行的操作。"
  fund_lobbies_effect_desc_first: "缔结“[concept_fund_lobbies]”协定"
- je_auto_fund_lobbies_status_created: "自动化#P 已启用#! — 最近一次检查缔结了一份新协定。"
+ je_auto_fund_lobbies_status_created: "自动化#P 已启用#! — 最近一次检查与[ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName]缔结了一份新协定。"
  je_auto_fund_lobbies_status_stuck: "自动化#P 已启用#! — 找到了有效目标，但未能缔结协定。请报告此问题。"
  je_auto_fund_lobbies_status_defunded: "自动化#P 已启用#! — 已取消一份协定以恢复受保护储备。"
  je_auto_fund_lobbies_status_cantafford: "自动化#P 已启用#! — 存在符合条件的国家，但可用[concept_influence]低于所有目标的门槛。"

@@ -6,19 +6,29 @@
 # just to break the following week.
 # this = candidate country, root = the automating country
 afl_valid_fund_target = {
+	save_temporary_scope_as = afl_check_candidate
 	NOT = { root = this }
 	NOT = { is_country_type = decentralized }
 	is_revolutionary = no
-	# has_diplomatic_pact is directional: by default it only matches pacts
-	# the scoped country initiated. The candidate is the pact HOST here, so
-	# is_initiator = no is required to match pacts root already created -
-	# without it, already-funded countries stay top-ranked candidates and
-	# the weekly create silently no-ops against their existing pact.
+	# Exclude countries root already funds. Checked by iterating root's own
+	# pacts with explicit direction (fund_lobbies: first_country = funder,
+	# second_country = host) - has_diplomatic_pact's direction handling
+	# proved unreliable for this.
 	NOT = {
-		has_diplomatic_pact = {
-			who = root
-			type = fund_lobbies
-			is_initiator = no
+		root = {
+			any_scope_diplomatic_pact = {
+				is_diplomatic_action_type = fund_lobbies
+				second_country = scope:afl_check_candidate
+			}
+		}
+	}
+	# Belt and braces: also exclude anything the automation already tracks.
+	NOT = {
+		root = {
+			is_target_in_variable_list = {
+				name = afl_funded_countries
+				target = scope:afl_check_candidate
+			}
 		}
 	}
 	NOT = { has_war_with = root }

@@ -14,7 +14,7 @@
  afl_button_run_now: "Проверить сейчас"
  afl_button_run_now_desc: "Немедленно выполняет одну проверку автоматизации, не дожидаясь следующего еженедельного цикла. Наведите курсор, чтобы увидеть, что именно будет сделано."
  fund_lobbies_effect_desc_first: "Заключить пакт «[concept_fund_lobbies]»"
- je_auto_fund_lobbies_status_created: "Автоматизация #P включена#! — последняя проверка заключила новый пакт."
+ je_auto_fund_lobbies_status_created: "Автоматизация #P включена#! — последняя проверка заключила новый пакт: [ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName]"
  je_auto_fund_lobbies_status_stuck: "Автоматизация #P включена#! — подходящая цель найдена, но пакт заключить не удалось. Пожалуйста, сообщите об этой проблеме."
  je_auto_fund_lobbies_status_defunded: "Автоматизация #P включена#! — один пакт расторгнут для восстановления защищённого резерва."
  je_auto_fund_lobbies_status_cantafford: "Автоматизация #P включена#! — подходящие страны есть, но доступного [Concept('concept_influence','Влияния')] не хватает ни для одной из них."

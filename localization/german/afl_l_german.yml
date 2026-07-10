@@ -14,7 +14,7 @@
  afl_button_run_now: "Jetzt prüfen"
  afl_button_run_now_desc: "Führt sofort eine Automatisierungsprüfung durch, ohne auf den nächsten Wochenimpuls zu warten. Beim Überfahren wird genau angezeigt, was geschehen wird."
  fund_lobbies_effect_desc_first: "Einen „[concept_fund_lobbies]“-Pakt schließen"
- je_auto_fund_lobbies_status_created: "Automatisierung #P aktiviert#! — die letzte Prüfung hat einen neuen Pakt geschlossen."
+ je_auto_fund_lobbies_status_created: "Automatisierung #P aktiviert#! — die letzte Prüfung hat einen neuen Pakt mit [ROOT.GetCountry.MakeScope.Var('afl_last_funded').GetCountry.GetName] geschlossen."
  je_auto_fund_lobbies_status_stuck: "Automatisierung #P aktiviert#! — ein gültiges Ziel wurde gefunden, aber der Pakt konnte nicht geschlossen werden. Bitte melden Sie dieses Problem."
  je_auto_fund_lobbies_status_defunded: "Automatisierung #P aktiviert#! — ein Pakt wurde aufgelöst, um die geschützte Reserve wiederherzustellen."
  je_auto_fund_lobbies_status_cantafford: "Automatisierung #P aktiviert#! — es gibt geeignete Länder, aber der verfügbare [concept_influence] liegt für alle unter der Schwelle."

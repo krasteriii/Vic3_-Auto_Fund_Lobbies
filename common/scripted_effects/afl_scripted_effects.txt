@@ -54,15 +54,18 @@ afl_weekly_update = {
 		set_variable = afl_diag_ticked
 
 		# 1) Forget tracked pacts that already broke on their own
-		#    (war, relations, rank loss, default...).
+		#    (war, relations, rank loss, default...). Direction-explicit
+		#    check: root's own pacts with the entry as second_country (host).
 		every_in_list = {
 			variable = afl_funded_countries
 			limit = {
+				save_temporary_scope_as = afl_check_entry
 				NOT = {
-					has_diplomatic_pact = {
-						who = root
-						type = fund_lobbies
-						is_initiator = no
+					root = {
+						any_scope_diplomatic_pact = {
+							is_diplomatic_action_type = fund_lobbies
+							second_country = scope:afl_check_entry
+						}
 					}
 				}
 			}
@@ -176,12 +179,12 @@ afl_weekly_update = {
 					}
 					# Only report success if the pact verifiably exists now;
 					# create_diplomatic_pact can no-op without any error.
+					# Direction-explicit check via root's own pact list.
 					if = {
 						limit = {
-							has_diplomatic_pact = {
-								who = scope:afl_new_target
-								type = fund_lobbies
-								is_initiator = yes
+							any_scope_diplomatic_pact = {
+								is_diplomatic_action_type = fund_lobbies
+								second_country = scope:afl_new_target
 							}
 						}
 						add_to_variable_list = {
@@ -189,6 +192,11 @@ afl_weekly_update = {
 							target = scope:afl_new_target
 						}
 						set_variable = afl_diag_pact_created
+						# Remember who was funded so the status line can name it
+						set_variable = {
+							name = afl_last_funded
+							value = scope:afl_new_target
+						}
 					}
 				}
 			}

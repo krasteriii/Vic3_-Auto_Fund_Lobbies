@@ -41,6 +41,7 @@ je_auto_fund_lobbies = {
 				trigger = {
 					has_variable = afl_enabled
 					has_variable = afl_diag_pact_created
+					has_variable = afl_last_funded
 				}
 			}
 			triggered_desc = {
