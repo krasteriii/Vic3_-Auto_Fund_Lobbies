@@ -1,4 +1,4 @@
-# Auto Fund Lobbies - scripted effects
+﻿# Auto Fund Lobbies - scripted effects
 
 # Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse.
 # root = the country owning the journal entry.

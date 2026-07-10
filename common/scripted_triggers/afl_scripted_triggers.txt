@@ -1,4 +1,4 @@
-# Auto Fund Lobbies - scripted triggers
+﻿# Auto Fund Lobbies - scripted triggers
 
 # Whether a country is a valid target for a new automated fund_lobbies pact.
 # Mirrors the pact's potential + requirement_to_maintain blocks

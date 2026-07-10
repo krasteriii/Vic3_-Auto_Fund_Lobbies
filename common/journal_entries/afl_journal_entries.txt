@@ -1,7 +1,10 @@
-# Auto Fund Lobbies - settings journal entry
-# Activates automatically for human players once Central Banking is
-# researched (the tech that unlocks the Fund Lobbies diplomatic action).
-# Never completes; acts as a permanent settings panel.
+﻿# Auto Fund Lobbies - settings journal entry
+# Added explicitly to human players at campaign start (see
+# common/on_actions/afl_on_actions.txt), with a monthly fallback so the
+# mod also works when enabled mid-save or after a tag switch.
+# Never completes; acts as a permanent settings panel. The weekly
+# automation itself only creates pacts once Central Banking is researched
+# (the tech that unlocks the Fund Lobbies diplomatic action).
 
 je_auto_fund_lobbies = {
 	icon = "gfx/interface/icons/political_lobby_icons/lobby_pro.dds"
@@ -16,10 +19,6 @@ je_auto_fund_lobbies = {
 	is_shown_when_inactive = {
 		is_player = yes
 		has_dlc_feature = lobbies
-	}
-
-	possible = {
-		has_technology_researched = central_banking
 	}
 
 	immediate = {
@@ -55,6 +54,4 @@ je_auto_fund_lobbies = {
 	}
 
 	weight = 10
-
-	transferable = yes
 }

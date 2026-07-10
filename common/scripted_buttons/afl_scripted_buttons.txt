@@ -1,4 +1,4 @@
-# Auto Fund Lobbies - journal entry buttons
+﻿# Auto Fund Lobbies - journal entry buttons
 # root = the country owning the journal entry
 
 afl_button_enable = {

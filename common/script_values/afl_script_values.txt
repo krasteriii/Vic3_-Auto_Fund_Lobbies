@@ -1,4 +1,4 @@
-# Auto Fund Lobbies - script values
+﻿# Auto Fund Lobbies - script values
 
 # ------------------------------------------------------------------
 # Influence thresholds required before creating one more fund_lobbies
