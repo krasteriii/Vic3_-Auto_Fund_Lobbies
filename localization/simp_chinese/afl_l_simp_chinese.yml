@@ -1,6 +1,6 @@
 ﻿l_simp_chinese:
  je_auto_fund_lobbies: "自动资助游说团"
- je_auto_fund_lobbies_reason: "自动化启用期间，超出受保护储备的[concept_influence]将被用于海外：每周与最合适的国家缔结一份新的“[concept_fund_lobbies]”协定，以壮大对我们友好的[Concept('concept_political_lobby','$concept_political_lobbies$')]。\n\n若可用[concept_influence]低于储备，将每周取消一份自动协定，直至储备恢复。手动缔结的协定绝不会受到影响；只有在国库没有债务且周收支为正时才会缔结新协定。\n\n受保护储备：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]（可在#v 50#!至#v 500#!之间调整）"
+ je_auto_fund_lobbies_reason: "自动化启用期间，超出受保护储备的[concept_influence]将被用于海外：每周与最合适的国家缔结一份新的“[concept_fund_lobbies]”协定，以壮大对我们友好的[Concept('concept_political_lobby','$concept_political_lobbies$')]。\n\n若可用[concept_influence]低于储备，将每周取消一份自动协定，直至储备恢复。手动缔结的协定绝不会受到影响；只有在周收支为正、债务较低且恶名不高时才会缔结新协定。\n\n受保护储备：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]（可在#v 50#!至#v 500#!之间调整）"
  je_auto_fund_lobbies_status_enabled: "自动化#P 已启用#! — 受保护储备：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  je_auto_fund_lobbies_status_disabled: "自动化#N 已禁用#! — 受保护储备：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  afl_button_enable: "启用自动化"

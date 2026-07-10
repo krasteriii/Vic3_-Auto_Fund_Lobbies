@@ -1,6 +1,6 @@
 ﻿l_korean:
  je_auto_fund_lobbies: "자동 로비 자금 지원"
- je_auto_fund_lobbies_reason: "자동화가 활성화되어 있는 동안, 보호 예비량을 초과하는 [concept_influence](은)는 해외에서 활용됩니다. 매주 가장 적합한 국가와 새로운 [concept_fund_lobbies] 협정을 하나 체결하여, 우리에게 우호적인 [Concept('concept_political_lobby','$concept_political_lobbies$')](을)를 강화합니다.\n\n사용 가능한 [concept_influence](이)가 예비량 아래로 떨어지면, 예비량이 회복될 때까지 자동 협정을 매주 하나씩 취소합니다. 수동으로 체결한 협정은 절대 건드리지 않으며, 새 협정은 국고에 부채가 없고 주간 수지가 흑자일 때만 체결됩니다.\n\n보호 예비량: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence] (#v 50#!~#v 500#! 사이에서 조정 가능)"
+ je_auto_fund_lobbies_reason: "자동화가 활성화되어 있는 동안, 보호 예비량을 초과하는 [concept_influence](은)는 해외에서 활용됩니다. 매주 가장 적합한 국가와 새로운 [concept_fund_lobbies] 협정을 하나 체결하여, 우리에게 우호적인 [Concept('concept_political_lobby','$concept_political_lobbies$')](을)를 강화합니다.\n\n사용 가능한 [concept_influence](이)가 예비량 아래로 떨어지면, 예비량이 회복될 때까지 자동 협정을 매주 하나씩 취소합니다. 수동으로 체결한 협정은 절대 건드리지 않으며, 새 협정은 주간 수지가 흑자이고 부채가 적으며 악명이 높지 않을 때만 체결됩니다.\n\n보호 예비량: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence] (#v 50#!~#v 500#! 사이에서 조정 가능)"
  je_auto_fund_lobbies_status_enabled: "자동화 #P 활성화#! — 보호 예비량: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  je_auto_fund_lobbies_status_disabled: "자동화 #N 비활성화#! — 보호 예비량: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  afl_button_enable: "자동화 활성화"
