@@ -13,3 +13,4 @@
  afl_button_reserve_down_desc: "Уменьшает защищённый резерв [Concept('concept_influence','Влияния')] на #v 50#!, минимум до #v 50#!. Текущий резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_run_now: "Проверить сейчас"
  afl_button_run_now_desc: "Немедленно выполняет одну проверку автоматизации, не дожидаясь следующего еженедельного цикла. Наведите курсор, чтобы увидеть, что именно будет сделано."
+ fund_lobbies_effect_desc_first: "Заключить пакт «[concept_fund_lobbies]»"

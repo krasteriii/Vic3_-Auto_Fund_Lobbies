@@ -13,3 +13,4 @@
  afl_button_reserve_down_desc: "보호되는 [concept_influence] 예비량을 #v 50#! 줄입니다(최소 #v 50#!). 현재 예비량: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_run_now: "지금 확인"
  afl_button_run_now_desc: "주간 처리를 기다리지 않고 자동화 검사를 즉시 1회 실행합니다. 마우스를 올리면 실행될 내용을 미리 볼 수 있습니다."
+ fund_lobbies_effect_desc_first: "[concept_fund_lobbies] 협정 체결"

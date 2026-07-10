@@ -82,17 +82,47 @@ afl_weekly_update = {
 				scaled_debt < 0.25
 				net_fixed_income > 0
 			}
+			# Influence needed before funding a target of each rank tier:
+			# protected reserve + estimated weekly pact cost. Base costs are
+			# 200 (great power), 150 (major power), 100 (below), from the
+			# pact cost of 100 times the rank's diplo_pact_cost, with a 15%
+			# margin and the infamy maintenance surcharges (+25%/+50%/+100%).
+			# Computed with plain variable arithmetic: script values that
+			# read country variables evaluate to 'none' here.
 			set_variable = {
 				name = afl_threshold_gp
-				value = afl_pact_threshold_great_power
+				value = var:afl_min_influence
 			}
 			set_variable = {
 				name = afl_threshold_mp
-				value = afl_pact_threshold_major_power
+				value = var:afl_min_influence
 			}
 			set_variable = {
 				name = afl_threshold_lp
-				value = afl_pact_threshold_default
+				value = var:afl_min_influence
+			}
+			if = {
+				limit = { infamy >= 100 }
+				change_variable = { name = afl_threshold_gp add = 460 }
+				change_variable = { name = afl_threshold_mp add = 345 }
+				change_variable = { name = afl_threshold_lp add = 230 }
+			}
+			else_if = {
+				limit = { infamy >= 50 }
+				change_variable = { name = afl_threshold_gp add = 345 }
+				change_variable = { name = afl_threshold_mp add = 259 }
+				change_variable = { name = afl_threshold_lp add = 173 }
+			}
+			else_if = {
+				limit = { infamy >= 25 }
+				change_variable = { name = afl_threshold_gp add = 288 }
+				change_variable = { name = afl_threshold_mp add = 216 }
+				change_variable = { name = afl_threshold_lp add = 144 }
+			}
+			else = {
+				change_variable = { name = afl_threshold_gp add = 230 }
+				change_variable = { name = afl_threshold_mp add = 173 }
+				change_variable = { name = afl_threshold_lp add = 115 }
 			}
 			ordered_country = {
 				limit = {
