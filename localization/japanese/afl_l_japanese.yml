@@ -1,6 +1,6 @@
 ﻿l_japanese:
  je_auto_fund_lobbies: "圧力団体への自動資金提供"
- je_auto_fund_lobbies_reason: "自動化が有効な間、保護された予備量を超える[concept_influence]は国外で活用されます。毎週、最も適した国と「[concept_fund_lobbies]」協定をひとつ新たに締結し、我が国に友好的な[concept_political_lobbies]を強化します。\n\n利用可能な[concept_influence]が予備量を下回った場合、予備量が回復するまで自動協定を週にひとつずつ解消します。手動で締結した協定には決して手を付けません。また、新たな協定は国庫が無借金で週間収支が黒字の間のみ締結されます。\n\n保護された予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]（#v 50#!～#v 500#!の間で調整可能）"
+ je_auto_fund_lobbies_reason: "自動化が有効な間、保護された予備量を超える[concept_influence]は国外で活用されます。毎週、最も適した国と「[concept_fund_lobbies]」協定をひとつ新たに締結し、我が国に友好的な[Concept('concept_political_lobby','$concept_political_lobbies$')]を強化します。\n\n利用可能な[concept_influence]が予備量を下回った場合、予備量が回復するまで自動協定を週にひとつずつ解消します。手動で締結した協定には決して手を付けません。また、新たな協定は国庫が無借金で週間収支が黒字の間のみ締結されます。\n\n保護された予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]（#v 50#!～#v 500#!の間で調整可能）"
  je_auto_fund_lobbies_status_enabled: "自動化：#P 有効#! — 保護された予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  je_auto_fund_lobbies_status_disabled: "自動化：#N 無効#! — 保護された予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#! [concept_influence]"
  afl_button_enable: "自動化を有効にする"

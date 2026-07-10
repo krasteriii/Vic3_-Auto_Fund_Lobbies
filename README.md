@@ -15,7 +15,7 @@ Once per week, while enabled:
 2. **Below the reserve?** Cancels the least valuable automated *Fund Lobbies* pact (one per week) until available Influence is back above the reserve. Pacts you created manually are **never** touched.
 3. **Comfortably above the reserve?** Creates one new *Fund Lobbies* pact per week with the best candidate country, preferring countries that already host a lobby friendly to you, your subjects, and members of your power bloc, then higher-ranked countries.
 
-Costs are estimated conservatively per target rank (a great power pact costs 200 base Influence, a major power 150, others 100, plus infamy and hostile-lobby surcharges), so a new pact is only created when it cannot drop you below your reserve. Because *Fund Lobbies* pacts also transfer money, new pacts are only created while your treasury is debt-free with a positive weekly balance — mirroring the checks the vanilla AI uses.
+Costs are estimated per target rank (a great power pact costs 200 base Influence, a major power 150, others 100, multiplied by your infamy level plus a 15% margin), so a new pact is only created when it should not drop you below your reserve — e.g. with no infamy, funding a minor power needs about 115 spare Influence above the reserve, a great power about 230. Because *Fund Lobbies* pacts also transfer money, new pacts are only created while your weekly balance is positive, you are not in default, and your debt is below 25% of your gold reserve limit (the same threshold at which the vanilla AI cancels these pacts).
 
 ## Requirements
 

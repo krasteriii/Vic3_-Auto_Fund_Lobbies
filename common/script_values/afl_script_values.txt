@@ -7,10 +7,11 @@
 # target rank's diplo_pact_cost (common/country_ranks/00_country_ranks.txt:
 # great power x2.0, major power x1.5, everything below x1.0 or less),
 # by the funder's infamy level (DIPLOMATIC_PACT_COST_MULT_FROM_* defines:
-# +25%/+50%/+100%) and by up to +50% from hostile lobby clout
-# (DIPLOMATIC_PACT_COST_LOBBY_CLOUT_MAX). The clout share cannot be read
-# from script, so a flat x1.5 safety margin is applied - overestimating
-# only delays a pact, while underestimating would cause create/cancel churn.
+# +25%/+50%/+100%) and by up to +/-50% from lobby clout
+# (DIPLOMATIC_PACT_COST_LOBBY_CLOUT_MAX). Clout is near zero when a pact
+# is first created (the lobby grows later), so only a small x1.15 margin
+# is applied on top; if a grown lobby later pushes costs up and influence
+# below the reserve, the weekly defund step corrects it.
 # Evaluated in the scope of the automating country.
 # ------------------------------------------------------------------
 
@@ -28,7 +29,7 @@ afl_pact_threshold_great_power = {
 		limit = { infamy >= 25 }
 		multiply = 1.25
 	}
-	multiply = 1.5
+	multiply = 1.15
 	add = var:afl_min_influence
 }
 
@@ -46,7 +47,7 @@ afl_pact_threshold_major_power = {
 		limit = { infamy >= 25 }
 		multiply = 1.25
 	}
-	multiply = 1.5
+	multiply = 1.15
 	add = var:afl_min_influence
 }
 
@@ -64,7 +65,7 @@ afl_pact_threshold_default = {
 		limit = { infamy >= 25 }
 		multiply = 1.25
 	}
-	multiply = 1.5
+	multiply = 1.15
 	add = var:afl_min_influence
 }
 

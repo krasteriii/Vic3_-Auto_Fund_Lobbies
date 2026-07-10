@@ -71,15 +71,16 @@ afl_weekly_update = {
 
 		# 3) Comfortably above the reserve: fund lobbies in the best new
 		#    target, one pact per week. The pact also transfers money, so
-		#    only spend while the treasury is healthy (mirrors the checks
-		#    the vanilla AI uses before proposing fund_lobbies).
+		#    only spend while the treasury is healthy: not defaulted, weekly
+		#    balance positive, and debt below 25% of reserves (the same
+		#    threshold at which the vanilla AI breaks these pacts).
 		else_if = {
 			limit = {
 				has_technology_researched = central_banking
 				NOT = { is_country_type = decentralized }
 				is_revolutionary = no
 				in_default = no
-				scaled_debt <= 0
+				scaled_debt < 0.25
 				net_fixed_income > 0
 			}
 			set_variable = {
