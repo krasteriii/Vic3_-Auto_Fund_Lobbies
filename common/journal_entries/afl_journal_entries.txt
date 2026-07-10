@@ -37,7 +37,49 @@ je_auto_fund_lobbies = {
 	status_desc = {
 		first_valid = {
 			triggered_desc = {
-				desc = je_auto_fund_lobbies_status_enabled
+				desc = je_auto_fund_lobbies_status_created
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_pact_created
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_stuck
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_have_candidate
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_defunded
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_defunded
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_cantafford
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_valid_exists
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_nocandidate
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_money_ok
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_blocked
+				trigger = {
+					has_variable = afl_enabled
+					has_variable = afl_diag_ticked
+				}
+			}
+			triggered_desc = {
+				desc = je_auto_fund_lobbies_status_notrun
 				trigger = {
 					has_variable = afl_enabled
 				}

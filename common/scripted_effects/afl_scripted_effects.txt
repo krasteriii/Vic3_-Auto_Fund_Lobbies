@@ -3,9 +3,9 @@
 # Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse
 # and from the "Check Now" journal entry button.
 # root = the country owning the journal entry.
-# All work happens inside the iterator bodies, and every numeric check is
-# a constant comparison through the scripted triggers - variable
-# arithmetic and script values proved unreliable in this context.
+# The afl_diag_* flag variables record how far each run got; the journal
+# entry status line reports the deepest stage reached, so failures are
+# visible in-game instead of silent.
 afl_weekly_update = {
 	# Country variables do not follow the journal entry through revolutions
 	# or tag switches, so restore the default reserve if it is missing.
@@ -19,18 +19,30 @@ afl_weekly_update = {
 		}
 	}
 
-	# Clean up scratch variables left behind by mod versions before 1.0.5
+	# Reset last run's diagnostics
 	if = {
-		limit = { has_variable = afl_threshold_gp }
-		remove_variable = afl_threshold_gp
+		limit = { has_variable = afl_diag_ticked }
+		remove_variable = afl_diag_ticked
 	}
 	if = {
-		limit = { has_variable = afl_threshold_mp }
-		remove_variable = afl_threshold_mp
+		limit = { has_variable = afl_diag_money_ok }
+		remove_variable = afl_diag_money_ok
 	}
 	if = {
-		limit = { has_variable = afl_threshold_lp }
-		remove_variable = afl_threshold_lp
+		limit = { has_variable = afl_diag_valid_exists }
+		remove_variable = afl_diag_valid_exists
+	}
+	if = {
+		limit = { has_variable = afl_diag_have_candidate }
+		remove_variable = afl_diag_have_candidate
+	}
+	if = {
+		limit = { has_variable = afl_diag_pact_created }
+		remove_variable = afl_diag_pact_created
+	}
+	if = {
+		limit = { has_variable = afl_diag_defunded }
+		remove_variable = afl_diag_defunded
 	}
 
 	if = {
@@ -39,6 +51,7 @@ afl_weekly_update = {
 			is_ai = no
 			has_dlc_feature = lobbies
 		}
+		set_variable = afl_diag_ticked
 
 		# 1) Forget tracked pacts that already broke on their own
 		#    (war, relations, rank loss, default...).
@@ -79,6 +92,7 @@ afl_weekly_update = {
 						name = afl_funded_countries
 						target = prev
 					}
+					set_variable = afl_diag_defunded
 				}
 			}
 		}
@@ -99,6 +113,39 @@ afl_weekly_update = {
 				net_fixed_income > 0
 				infamy < 50
 			}
+			set_variable = afl_diag_money_ok
+
+			if = {
+				limit = {
+					any_country = {
+						afl_valid_fund_target = yes
+					}
+				}
+				set_variable = afl_diag_valid_exists
+			}
+			if = {
+				limit = {
+					any_country = {
+						afl_valid_fund_target = yes
+						OR = {
+							AND = {
+								country_rank >= rank_value:great_power
+								root = { afl_can_afford_great_tier = yes }
+							}
+							AND = {
+								country_rank = rank_value:major_power
+								root = { afl_can_afford_major_tier = yes }
+							}
+							AND = {
+								country_rank < rank_value:major_power
+								root = { afl_can_afford_default_tier = yes }
+							}
+						}
+					}
+				}
+				set_variable = afl_diag_have_candidate
+			}
+
 			ordered_country = {
 				limit = {
 					afl_valid_fund_target = yes
@@ -128,6 +175,7 @@ afl_weekly_update = {
 						name = afl_funded_countries
 						target = prev
 					}
+					set_variable = afl_diag_pact_created
 				}
 			}
 		}
