@@ -21,5 +21,3 @@
  je_auto_fund_lobbies_status_nocandidate: "Automação #P ativada#! — nenhum país elegível para financiar no momento."
  je_auto_fund_lobbies_status_blocked: "Automação #P ativada#! — pausada: tesouro em más condições, falta de Banco Central, infâmia alta ou [concept_influence] abaixo da reserva."
  je_auto_fund_lobbies_status_notrun: "Automação #P ativada#! — aguardando a primeira verificação (despause ou clique em Verificar Agora)."
- afl_button_debug_test: "Depuração: Teste de Pacto"
- afl_button_debug_test_desc: "Diagnóstico temporário: cria um pacto de Melhorar Relações com o melhor candidato da automação e um pacto de Financiar Lobbies com a Birmânia. Depois, verifique o painel de Diplomacia e informe qual dos dois apareceu."

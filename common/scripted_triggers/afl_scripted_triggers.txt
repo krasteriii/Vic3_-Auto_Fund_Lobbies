@@ -9,10 +9,16 @@ afl_valid_fund_target = {
 	NOT = { root = this }
 	NOT = { is_country_type = decentralized }
 	is_revolutionary = no
+	# has_diplomatic_pact is directional: by default it only matches pacts
+	# the scoped country initiated. The candidate is the pact HOST here, so
+	# is_initiator = no is required to match pacts root already created -
+	# without it, already-funded countries stay top-ranked candidates and
+	# the weekly create silently no-ops against their existing pact.
 	NOT = {
 		has_diplomatic_pact = {
 			who = root
 			type = fund_lobbies
+			is_initiator = no
 		}
 	}
 	NOT = { has_war_with = root }

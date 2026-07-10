@@ -21,5 +21,3 @@
  je_auto_fund_lobbies_status_nocandidate: "Automatyzacja #P włączona#! — obecnie brak odpowiedniego państwa do finansowania."
  je_auto_fund_lobbies_status_blocked: "Automatyzacja #P włączona#! — wstrzymana: zły stan skarbu, brak Banku centralnego, wysoka niesława lub [Concept('concept_influence','Wpływ')] poniżej rezerwy."
  je_auto_fund_lobbies_status_notrun: "Automatyzacja #P włączona#! — oczekiwanie na pierwszą kontrolę (wznów grę lub naciśnij Sprawdź teraz)."
- afl_button_debug_test: "Debug: test paktu"
- afl_button_debug_test_desc: "Tymczasowa diagnostyka: zawiera pakt Poprawa stosunków z najlepszym kandydatem automatyzacji oraz pakt Finansowania lobby z Birmą. Następnie sprawdź panel dyplomacji i zgłoś, który z nich się pojawił."

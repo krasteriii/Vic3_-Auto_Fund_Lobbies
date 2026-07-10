@@ -21,5 +21,3 @@
  je_auto_fund_lobbies_status_nocandidate: "自動化：#P 有効#! — 現在、資金提供できる対象国がありません。"
  je_auto_fund_lobbies_status_blocked: "自動化：#P 有効#! — 一時停止中：財政悪化、中央銀行の未研究、悪名が高い、または[concept_influence]が予備量を下回っています。"
  je_auto_fund_lobbies_status_notrun: "自動化：#P 有効#! — 最初の確認を待っています（ポーズを解除するか「今すぐ確認」を押してください）。"
- afl_button_debug_test: "デバッグ：協定テスト"
- afl_button_debug_test_desc: "一時的な診断：自動化の最有力候補と「関係改善」協定を、ビルマと「圧力団体への資金提供」協定を締結します。実行後、外交画面を確認し、どちらが現れたかを報告してください。"

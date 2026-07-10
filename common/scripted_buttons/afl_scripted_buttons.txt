@@ -56,52 +56,6 @@ afl_button_run_now = {
 	}
 }
 
-# Temporary diagnostic button: tests pact creation two ways in one click.
-# Will be removed once the create_diplomatic_pact behavior is confirmed.
-afl_button_debug_test = {
-	name = "afl_button_debug_test"
-	desc = "afl_button_debug_test_desc"
-
-	visible = {
-		has_variable = afl_enabled
-	}
-
-	effect = {
-		# Test A: a plain increase_relations pact toward the automation's
-		# top candidate - does pact creation work from this context at all?
-		ordered_country = {
-			limit = {
-				afl_valid_fund_target = yes
-			}
-			order_by = afl_fund_target_score
-			position = 0
-			save_scope_as = afl_test_target
-			root = {
-				create_diplomatic_pact = {
-					country = scope:afl_test_target
-					type = increase_relations
-				}
-			}
-		}
-		# Test B: a fund_lobbies pact toward a hardcoded country - does this
-		# pact type work with zero scope indirection?
-		c:BUR ?= {
-			save_scope_as = afl_test_burma
-		}
-		if = {
-			limit = { exists = scope:afl_test_burma }
-			create_diplomatic_pact = {
-				country = scope:afl_test_burma
-				type = fund_lobbies
-			}
-		}
-	}
-
-	ai_chance = {
-		value = 0
-	}
-}
-
 afl_button_reserve_up = {
 	name = "afl_button_reserve_up"
 	desc = "afl_button_reserve_up_desc"
