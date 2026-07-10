@@ -11,3 +11,5 @@
  afl_button_reserve_up_desc: "保護された[concept_influence]の予備量を#v 50#!増やします（最大#v 500#!）。現在の予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_reserve_down: "予備量を減らす（-50）"
  afl_button_reserve_down_desc: "保護された[concept_influence]の予備量を#v 50#!減らします（最小#v 50#!）。現在の予備量：#v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_run_now: "今すぐ確認"
+ afl_button_run_now_desc: "毎週の処理を待たずに、自動化の判定を直ちに1回実行します。カーソルを合わせると、実行される内容を確認できます。"

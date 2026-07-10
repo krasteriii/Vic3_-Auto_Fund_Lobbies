@@ -39,6 +39,23 @@ afl_button_disable = {
 	}
 }
 
+afl_button_run_now = {
+	name = "afl_button_run_now"
+	desc = "afl_button_run_now_desc"
+
+	visible = {
+		has_variable = afl_enabled
+	}
+
+	effect = {
+		afl_weekly_update = yes
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+
 afl_button_reserve_up = {
 	name = "afl_button_reserve_up"
 	desc = "afl_button_reserve_up_desc"

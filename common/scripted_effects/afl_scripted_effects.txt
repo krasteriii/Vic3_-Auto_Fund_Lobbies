@@ -1,7 +1,10 @@
 ﻿# Auto Fund Lobbies - scripted effects
 
-# Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse.
+# Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse
+# and from the "Check Now" journal entry button.
 # root = the country owning the journal entry.
+# All work happens inside the iterator bodies (vanilla pattern) - scopes
+# saved inside an iterator are not read after it closes.
 afl_weekly_update = {
 	# Country variables do not follow the journal entry through revolutions
 	# or tag switches, so restore the default reserve if it is missing.
@@ -21,7 +24,6 @@ afl_weekly_update = {
 			is_ai = no
 			has_dlc_feature = lobbies
 		}
-		save_temporary_scope_as = afl_funder
 
 		# 1) Forget tracked pacts that already broke on their own
 		#    (war, relations, rank loss, default...).
@@ -30,17 +32,16 @@ afl_weekly_update = {
 			limit = {
 				NOT = {
 					has_diplomatic_pact = {
-						who = scope:afl_funder
+						who = root
 						type = fund_lobbies
 						is_initiator = no
 					}
 				}
 			}
-			save_temporary_scope_as = afl_stale_entry
-			scope:afl_funder = {
+			root = {
 				remove_list_variable = {
 					name = afl_funded_countries
-					target = scope:afl_stale_entry
+					target = prev
 				}
 			}
 		}
@@ -54,17 +55,15 @@ afl_weekly_update = {
 				variable = afl_funded_countries
 				order_by = afl_defund_priority
 				position = 0
-				save_temporary_scope_as = afl_defund_target
-			}
-			if = {
-				limit = { exists = scope:afl_defund_target }
-				remove_diplomatic_pact = {
-					country = scope:afl_defund_target
-					type = fund_lobbies
-				}
-				remove_list_variable = {
-					name = afl_funded_countries
-					target = scope:afl_defund_target
+				root = {
+					remove_diplomatic_pact = {
+						country = prev
+						type = fund_lobbies
+					}
+					remove_list_variable = {
+						name = afl_funded_countries
+						target = prev
+					}
 				}
 			}
 		}
@@ -101,31 +100,29 @@ afl_weekly_update = {
 					OR = {
 						AND = {
 							country_rank >= rank_value:great_power
-							scope:afl_funder = { influence >= var:afl_threshold_gp }
+							root = { influence >= var:afl_threshold_gp }
 						}
 						AND = {
 							country_rank = rank_value:major_power
-							scope:afl_funder = { influence >= var:afl_threshold_mp }
+							root = { influence >= var:afl_threshold_mp }
 						}
 						AND = {
 							country_rank < rank_value:major_power
-							scope:afl_funder = { influence >= var:afl_threshold_lp }
+							root = { influence >= var:afl_threshold_lp }
 						}
 					}
 				}
 				order_by = afl_fund_target_score
 				position = 0
-				save_temporary_scope_as = afl_fund_target
-			}
-			if = {
-				limit = { exists = scope:afl_fund_target }
-				create_diplomatic_pact = {
-					country = scope:afl_fund_target
-					type = fund_lobbies
-				}
-				add_to_variable_list = {
-					name = afl_funded_countries
-					target = scope:afl_fund_target
+				root = {
+					create_diplomatic_pact = {
+						country = prev
+						type = fund_lobbies
+					}
+					add_to_variable_list = {
+						name = afl_funded_countries
+						target = prev
+					}
 				}
 			}
 			remove_variable = afl_threshold_gp

@@ -11,3 +11,5 @@
  afl_button_reserve_up_desc: "Увеличивает защищённый резерв [Concept('concept_influence','Влияния')] на #v 50#!, максимум до #v 500#!. Текущий резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_reserve_down: "Уменьшить резерв (-50)"
  afl_button_reserve_down_desc: "Уменьшает защищённый резерв [Concept('concept_influence','Влияния')] на #v 50#!, минимум до #v 50#!. Текущий резерв: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_run_now: "Проверить сейчас"
+ afl_button_run_now_desc: "Немедленно выполняет одну проверку автоматизации, не дожидаясь следующего еженедельного цикла. Наведите курсор, чтобы увидеть, что именно будет сделано."

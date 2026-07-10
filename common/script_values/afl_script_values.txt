@@ -71,14 +71,14 @@ afl_pact_threshold_default = {
 
 # ------------------------------------------------------------------
 # How attractive a country is as a funding target.
-# this = candidate country, scope:afl_funder = the automating country
+# this = candidate country, root = the automating country
 # ------------------------------------------------------------------
 afl_fund_target_score = {
 	value = country_rank
 	if = {
 		limit = {
 			any_political_lobby = {
-				target = scope:afl_funder
+				target = root
 				OR = {
 					is_political_lobby_type = lobby_pro_country
 					is_political_lobby_type = lobby_pro_overlord
@@ -88,11 +88,11 @@ afl_fund_target_score = {
 		add = 100
 	}
 	if = {
-		limit = { is_subject_of = scope:afl_funder }
+		limit = { is_subject_of = root }
 		add = 50
 	}
 	if = {
-		limit = { is_in_same_power_bloc = scope:afl_funder }
+		limit = { is_in_same_power_bloc = root }
 		add = 25
 	}
 }

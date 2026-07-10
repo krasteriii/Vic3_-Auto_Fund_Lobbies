@@ -5,6 +5,7 @@ If the player has enough Influence, it will automatically fund lobbies abroad �
 A permanent **journal entry** (*Automated Lobby Funding*, under Foreign Affairs) acts as the settings panel:
 
 - **Enable / Disable Automation** — off by default; one click to turn on.
+- **Check Now** — runs one automation check immediately instead of waiting for the weekly tick; hover it to preview exactly what it will do.
 - **Protected Influence reserve** — Influence the automation will never spend. Adjustable between **50 and 500** in steps of 50 (default 100).
 
 ## What the automation does

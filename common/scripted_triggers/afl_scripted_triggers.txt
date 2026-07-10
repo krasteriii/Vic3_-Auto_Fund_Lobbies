@@ -4,21 +4,21 @@
 # Mirrors the pact's potential + requirement_to_maintain blocks
 # (common/diplomatic_actions/30_fund_lobby.txt) so pacts are not created
 # just to break the following week.
-# this = candidate country, root / scope:afl_funder = the automating country
+# this = candidate country, root = the automating country
 afl_valid_fund_target = {
-	NOT = { scope:afl_funder = this }
+	NOT = { root = this }
 	NOT = { is_country_type = decentralized }
 	is_revolutionary = no
 	NOT = {
 		has_diplomatic_pact = {
-			who = scope:afl_funder
+			who = root
 			type = fund_lobbies
 		}
 	}
-	NOT = { has_war_with = scope:afl_funder }
-	country_rank <= scope:afl_funder.country_rank
+	NOT = { has_war_with = root }
+	country_rank <= root.country_rank
 	relations:root > relations_threshold:poor
-	scope:afl_funder = {
+	root = {
 		has_diplomatic_relevance = prev
 	}
 }

@@ -11,3 +11,5 @@
  afl_button_reserve_up_desc: "Korunan [concept_influence] rezervini #v 50#! artırır (en fazla #v 500#!). Mevcut rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_reserve_down: "Rezervi Azalt (-50)"
  afl_button_reserve_down_desc: "Korunan [concept_influence] rezervini #v 50#! azaltır (en az #v 50#!). Mevcut rezerv: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_run_now: "Şimdi Denetle"
+ afl_button_run_now_desc: "Haftalık döngüyü beklemeden otomasyon denetimini hemen bir kez çalıştırır. Tam olarak ne yapılacağını görmek için imleci üzerine getirin."

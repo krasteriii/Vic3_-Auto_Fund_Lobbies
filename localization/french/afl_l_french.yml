@@ -11,3 +11,5 @@
  afl_button_reserve_up_desc: "Augmente la réserve protégée d'[concept_influence] de #v 50#!, jusqu'à un maximum de #v 500#!. Réserve actuelle : #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_reserve_down: "Réduire la réserve (-50)"
  afl_button_reserve_down_desc: "Réduit la réserve protégée d'[concept_influence] de #v 50#!, jusqu'à un minimum de #v 50#!. Réserve actuelle : #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_run_now: "Vérifier maintenant"
+ afl_button_run_now_desc: "Exécute immédiatement une vérification de l'automatisation, sans attendre le prochain cycle hebdomadaire. Survolez pour voir exactement ce qui sera fait."

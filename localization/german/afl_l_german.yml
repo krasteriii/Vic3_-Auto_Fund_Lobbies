@@ -11,3 +11,5 @@
  afl_button_reserve_up_desc: "Erhöht die geschützte [concept_influence]-Reserve um #v 50#!, bis zu einem Maximum von #v 500#!. Aktuelle Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
  afl_button_reserve_down: "Reserve verringern (-50)"
  afl_button_reserve_down_desc: "Verringert die geschützte [concept_influence]-Reserve um #v 50#!, bis zu einem Minimum von #v 50#!. Aktuelle Reserve: #v [ROOT.GetCountry.MakeScope.Var('afl_min_influence').GetValue|v0]#!"
+ afl_button_run_now: "Jetzt prüfen"
+ afl_button_run_now_desc: "Führt sofort eine Automatisierungsprüfung durch, ohne auf den nächsten Wochenimpuls zu warten. Beim Überfahren wird genau angezeigt, was geschehen wird."
