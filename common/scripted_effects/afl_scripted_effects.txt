@@ -174,11 +174,22 @@ afl_weekly_update = {
 						country = scope:afl_new_target
 						type = fund_lobbies
 					}
-					add_to_variable_list = {
-						name = afl_funded_countries
-						target = scope:afl_new_target
+					# Only report success if the pact verifiably exists now;
+					# create_diplomatic_pact can no-op without any error.
+					if = {
+						limit = {
+							has_diplomatic_pact = {
+								who = scope:afl_new_target
+								type = fund_lobbies
+								is_initiator = yes
+							}
+						}
+						add_to_variable_list = {
+							name = afl_funded_countries
+							target = scope:afl_new_target
+						}
+						set_variable = afl_diag_pact_created
 					}
-					set_variable = afl_diag_pact_created
 				}
 			}
 		}
