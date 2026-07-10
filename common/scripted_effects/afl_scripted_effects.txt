@@ -3,8 +3,9 @@
 # Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse
 # and from the "Check Now" journal entry button.
 # root = the country owning the journal entry.
-# All work happens inside the iterator bodies (vanilla pattern) - scopes
-# saved inside an iterator are not read after it closes.
+# All work happens inside the iterator bodies, and every numeric check is
+# a constant comparison through the scripted triggers - variable
+# arithmetic and script values proved unreliable in this context.
 afl_weekly_update = {
 	# Country variables do not follow the journal entry through revolutions
 	# or tag switches, so restore the default reserve if it is missing.
@@ -16,6 +17,20 @@ afl_weekly_update = {
 			name = afl_min_influence
 			value = 100
 		}
+	}
+
+	# Clean up scratch variables left behind by mod versions before 1.0.5
+	if = {
+		limit = { has_variable = afl_threshold_gp }
+		remove_variable = afl_threshold_gp
+	}
+	if = {
+		limit = { has_variable = afl_threshold_mp }
+		remove_variable = afl_threshold_mp
+	}
+	if = {
+		limit = { has_variable = afl_threshold_lp }
+		remove_variable = afl_threshold_lp
 	}
 
 	if = {
@@ -50,7 +65,7 @@ afl_weekly_update = {
 		#    automated pact, one per week. Manually created pacts are
 		#    never in the list, so they are never touched.
 		if = {
-			limit = { influence < var:afl_min_influence }
+			limit = { afl_below_reserve = yes }
 			ordered_in_list = {
 				variable = afl_funded_countries
 				order_by = afl_defund_priority
@@ -72,7 +87,8 @@ afl_weekly_update = {
 		#    target, one pact per week. The pact also transfers money, so
 		#    only spend while the treasury is healthy: not defaulted, weekly
 		#    balance positive, and debt below 25% of reserves (the same
-		#    threshold at which the vanilla AI breaks these pacts).
+		#    threshold at which the vanilla AI breaks these pacts). Pact
+		#    upkeep doubles at Notorious infamy, so automation pauses there.
 		else_if = {
 			limit = {
 				has_technology_researched = central_banking
@@ -81,48 +97,7 @@ afl_weekly_update = {
 				in_default = no
 				scaled_debt < 0.25
 				net_fixed_income > 0
-			}
-			# Influence needed before funding a target of each rank tier:
-			# protected reserve + estimated weekly pact cost. Base costs are
-			# 200 (great power), 150 (major power), 100 (below), from the
-			# pact cost of 100 times the rank's diplo_pact_cost, with a 15%
-			# margin and the infamy maintenance surcharges (+25%/+50%/+100%).
-			# Computed with plain variable arithmetic: script values that
-			# read country variables evaluate to 'none' here.
-			set_variable = {
-				name = afl_threshold_gp
-				value = var:afl_min_influence
-			}
-			set_variable = {
-				name = afl_threshold_mp
-				value = var:afl_min_influence
-			}
-			set_variable = {
-				name = afl_threshold_lp
-				value = var:afl_min_influence
-			}
-			if = {
-				limit = { infamy >= 100 }
-				change_variable = { name = afl_threshold_gp add = 460 }
-				change_variable = { name = afl_threshold_mp add = 345 }
-				change_variable = { name = afl_threshold_lp add = 230 }
-			}
-			else_if = {
-				limit = { infamy >= 50 }
-				change_variable = { name = afl_threshold_gp add = 345 }
-				change_variable = { name = afl_threshold_mp add = 259 }
-				change_variable = { name = afl_threshold_lp add = 173 }
-			}
-			else_if = {
-				limit = { infamy >= 25 }
-				change_variable = { name = afl_threshold_gp add = 288 }
-				change_variable = { name = afl_threshold_mp add = 216 }
-				change_variable = { name = afl_threshold_lp add = 144 }
-			}
-			else = {
-				change_variable = { name = afl_threshold_gp add = 230 }
-				change_variable = { name = afl_threshold_mp add = 173 }
-				change_variable = { name = afl_threshold_lp add = 115 }
+				infamy < 50
 			}
 			ordered_country = {
 				limit = {
@@ -130,15 +105,15 @@ afl_weekly_update = {
 					OR = {
 						AND = {
 							country_rank >= rank_value:great_power
-							root = { influence >= var:afl_threshold_gp }
+							root = { afl_can_afford_great_tier = yes }
 						}
 						AND = {
 							country_rank = rank_value:major_power
-							root = { influence >= var:afl_threshold_mp }
+							root = { afl_can_afford_major_tier = yes }
 						}
 						AND = {
 							country_rank < rank_value:major_power
-							root = { influence >= var:afl_threshold_lp }
+							root = { afl_can_afford_default_tier = yes }
 						}
 					}
 				}
@@ -155,9 +130,6 @@ afl_weekly_update = {
 					}
 				}
 			}
-			remove_variable = afl_threshold_gp
-			remove_variable = afl_threshold_mp
-			remove_variable = afl_threshold_lp
 		}
 	}
 }

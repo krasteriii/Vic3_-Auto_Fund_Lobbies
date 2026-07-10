@@ -1,16 +1,31 @@
 ﻿# Auto Fund Lobbies - script values
 #
-# NOTE: the influence thresholds for creating pacts are computed with
-# plain variable arithmetic inside afl_weekly_update (scripted_effects) -
-# script values that read country variables evaluate to 'none' when used
-# through set_variable, so no script value here may reference var:.
+# Only constant values gated by triggers are used here - reading country
+# variables or numeric triggers (country_rank, influence...) as values
+# proved unreliable in this mod's contexts. All influence thresholds live
+# as constant comparisons in the scripted triggers instead.
 
 # ------------------------------------------------------------------
 # How attractive a country is as a funding target.
 # this = candidate country, root = the automating country
 # ------------------------------------------------------------------
 afl_fund_target_score = {
-	value = country_rank
+	value = 0
+	if = {
+		limit = { country_rank >= rank_value:great_power }
+		add = 8
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_major_power }
+		add = 6
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_regional_power }
+		add = 4
+	}
+	else = {
+		add = 2
+	}
 	if = {
 		limit = {
 			any_political_lobby = {
@@ -33,9 +48,43 @@ afl_fund_target_score = {
 	}
 }
 
-# Inverse of the target score: the least valuable funded country is
-# defunded first when influence drops below the protected reserve.
+# Mirror of afl_fund_target_score with inverted sign: the least valuable
+# funded country is defunded first when influence drops below the reserve.
 afl_defund_priority = {
 	value = 0
-	subtract = afl_fund_target_score
+	if = {
+		limit = { country_rank >= rank_value:great_power }
+		subtract = 8
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_major_power }
+		subtract = 6
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_regional_power }
+		subtract = 4
+	}
+	else = {
+		subtract = 2
+	}
+	if = {
+		limit = {
+			any_political_lobby = {
+				target = root
+				OR = {
+					is_political_lobby_type = lobby_pro_country
+					is_political_lobby_type = lobby_pro_overlord
+				}
+			}
+		}
+		subtract = 100
+	}
+	if = {
+		limit = { is_subject_of = root }
+		subtract = 50
+	}
+	if = {
+		limit = { is_in_same_power_bloc = root }
+		subtract = 25
+	}
 }
