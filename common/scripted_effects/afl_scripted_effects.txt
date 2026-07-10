@@ -66,10 +66,11 @@ afl_weekly_update = {
 					}
 				}
 			}
+			save_scope_as = afl_stale_entry
 			root = {
 				remove_list_variable = {
 					name = afl_funded_countries
-					target = prev
+					target = scope:afl_stale_entry
 				}
 			}
 		}
@@ -83,14 +84,15 @@ afl_weekly_update = {
 				variable = afl_funded_countries
 				order_by = afl_defund_priority
 				position = 0
+				save_scope_as = afl_defund_target
 				root = {
 					remove_diplomatic_pact = {
-						country = prev
+						country = scope:afl_defund_target
 						type = fund_lobbies
 					}
 					remove_list_variable = {
 						name = afl_funded_countries
-						target = prev
+						target = scope:afl_defund_target
 					}
 					set_variable = afl_diag_defunded
 				}
@@ -166,14 +168,15 @@ afl_weekly_update = {
 				}
 				order_by = afl_fund_target_score
 				position = 0
+				save_scope_as = afl_new_target
 				root = {
 					create_diplomatic_pact = {
-						country = prev
+						country = scope:afl_new_target
 						type = fund_lobbies
 					}
 					add_to_variable_list = {
 						name = afl_funded_countries
-						target = prev
+						target = scope:afl_new_target
 					}
 					set_variable = afl_diag_pact_created
 				}
