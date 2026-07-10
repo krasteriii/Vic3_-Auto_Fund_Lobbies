@@ -1,0 +1,113 @@
+﻿# Auto Fund Lobbies - scripted triggers
+
+# Whether a country is a valid target for a new automated fund_lobbies pact.
+# Mirrors the pact's potential + requirement_to_maintain blocks
+# (common/diplomatic_actions/30_fund_lobby.txt) so pacts are not created
+# just to break the following week.
+# this = candidate country, root = the automating country
+afl_valid_fund_target = {
+	save_temporary_scope_as = afl_check_candidate
+	NOT = { root = this }
+	NOT = { is_country_type = decentralized }
+	is_revolutionary = no
+	# Exclude countries root already funds. Checked by iterating root's own
+	# pacts with explicit direction (fund_lobbies: first_country = funder,
+	# second_country = host) - has_diplomatic_pact's direction handling
+	# proved unreliable for this.
+	NOT = {
+		root = {
+			any_scope_diplomatic_pact = {
+				is_diplomatic_action_type = fund_lobbies
+				second_country = scope:afl_check_candidate
+			}
+		}
+	}
+	# Belt and braces: also exclude anything the automation already tracks.
+	NOT = {
+		root = {
+			is_target_in_variable_list = {
+				name = afl_funded_countries
+				target = scope:afl_check_candidate
+			}
+		}
+	}
+	NOT = { has_war_with = root }
+	country_rank <= root.country_rank
+	relations:root > relations_threshold:poor
+	root = {
+		has_diplomatic_relevance = prev
+	}
+}
+
+# ------------------------------------------------------------------
+# Affordability checks, evaluated on the automating country.
+# The protected reserve only takes the 10 values 50..500 (step 50), so
+# every threshold is enumerated with constants: reserve + estimated
+# weekly pact cost (base 100 x rank diplo_pact_cost, +15% margin, +25%
+# infamy headroom). Only constant comparisons are used - variable
+# arithmetic and script values misbehave in this context.
+# ------------------------------------------------------------------
+
+# Target below major power rank: reserve + 144
+afl_can_afford_default_tier = {
+	OR = {
+		AND = { var:afl_min_influence ?= 50 influence >= 194 }
+		AND = { var:afl_min_influence ?= 100 influence >= 244 }
+		AND = { var:afl_min_influence ?= 150 influence >= 294 }
+		AND = { var:afl_min_influence ?= 200 influence >= 344 }
+		AND = { var:afl_min_influence ?= 250 influence >= 394 }
+		AND = { var:afl_min_influence ?= 300 influence >= 444 }
+		AND = { var:afl_min_influence ?= 350 influence >= 494 }
+		AND = { var:afl_min_influence ?= 400 influence >= 544 }
+		AND = { var:afl_min_influence ?= 450 influence >= 594 }
+		AND = { var:afl_min_influence ?= 500 influence >= 644 }
+	}
+}
+
+# Major power target: reserve + 216
+afl_can_afford_major_tier = {
+	OR = {
+		AND = { var:afl_min_influence ?= 50 influence >= 266 }
+		AND = { var:afl_min_influence ?= 100 influence >= 316 }
+		AND = { var:afl_min_influence ?= 150 influence >= 366 }
+		AND = { var:afl_min_influence ?= 200 influence >= 416 }
+		AND = { var:afl_min_influence ?= 250 influence >= 466 }
+		AND = { var:afl_min_influence ?= 300 influence >= 516 }
+		AND = { var:afl_min_influence ?= 350 influence >= 566 }
+		AND = { var:afl_min_influence ?= 400 influence >= 616 }
+		AND = { var:afl_min_influence ?= 450 influence >= 666 }
+		AND = { var:afl_min_influence ?= 500 influence >= 716 }
+	}
+}
+
+# Great power target: reserve + 288
+afl_can_afford_great_tier = {
+	OR = {
+		AND = { var:afl_min_influence ?= 50 influence >= 338 }
+		AND = { var:afl_min_influence ?= 100 influence >= 388 }
+		AND = { var:afl_min_influence ?= 150 influence >= 438 }
+		AND = { var:afl_min_influence ?= 200 influence >= 488 }
+		AND = { var:afl_min_influence ?= 250 influence >= 538 }
+		AND = { var:afl_min_influence ?= 300 influence >= 588 }
+		AND = { var:afl_min_influence ?= 350 influence >= 638 }
+		AND = { var:afl_min_influence ?= 400 influence >= 688 }
+		AND = { var:afl_min_influence ?= 450 influence >= 738 }
+		AND = { var:afl_min_influence ?= 500 influence >= 788 }
+	}
+}
+
+# Available influence has fallen below the protected reserve
+afl_below_reserve = {
+	OR = {
+		AND = { var:afl_min_influence ?= 50 influence < 50 }
+		AND = { var:afl_min_influence ?= 100 influence < 100 }
+		AND = { var:afl_min_influence ?= 150 influence < 150 }
+		AND = { var:afl_min_influence ?= 200 influence < 200 }
+		AND = { var:afl_min_influence ?= 250 influence < 250 }
+		AND = { var:afl_min_influence ?= 300 influence < 300 }
+		AND = { var:afl_min_influence ?= 350 influence < 350 }
+		AND = { var:afl_min_influence ?= 400 influence < 400 }
+		AND = { var:afl_min_influence ?= 450 influence < 450 }
+		AND = { var:afl_min_influence ?= 500 influence < 500 }
+	}
+}

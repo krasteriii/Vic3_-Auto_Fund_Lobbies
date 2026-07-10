@@ -1,0 +1,52 @@
+﻿# Auto Fund Lobbies - on_actions
+# Merge-safe wrapper pattern (see game/common/on_actions/_on_actions.md):
+# vanilla on_actions get an on_actions list entry pointing at our own
+# named on_action, never a second effect block.
+
+# New campaigns: add the settings journal entry to every human player as
+# soon as everyone has entered the game.
+on_game_started_after_lobby = {
+	on_actions = {
+		afl_on_game_started
+	}
+}
+
+# No root scope in on_game_started_after_lobby
+afl_on_game_started = {
+	effect = {
+		every_country = {
+			limit = {
+				is_player = yes
+				has_dlc_feature = lobbies
+				NOT = { has_journal_entry = je_auto_fund_lobbies }
+			}
+			add_journal_entry = {
+				type = je_auto_fund_lobbies
+			}
+		}
+	}
+}
+
+# Existing saves / tag switches: make sure human players get the journal
+# entry within a month.
+on_monthly_pulse_country = {
+	on_actions = {
+		afl_monthly_je_check
+	}
+}
+
+# Root = Country
+afl_monthly_je_check = {
+	effect = {
+		if = {
+			limit = {
+				is_player = yes
+				has_dlc_feature = lobbies
+				NOT = { has_journal_entry = je_auto_fund_lobbies }
+			}
+			add_journal_entry = {
+				type = je_auto_fund_lobbies
+			}
+		}
+	}
+}

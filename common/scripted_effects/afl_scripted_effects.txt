@@ -1,0 +1,205 @@
+﻿# Auto Fund Lobbies - scripted effects
+
+# Weekly automation tick, fired from je_auto_fund_lobbies' on_weekly_pulse
+# and from the "Check Now" journal entry button.
+# root = the country owning the journal entry.
+# The afl_diag_* flag variables record how far each run got; the journal
+# entry status line reports the deepest stage reached, so failures are
+# visible in-game instead of silent.
+afl_weekly_update = {
+	# Country variables do not follow the journal entry through revolutions
+	# or tag switches, so restore the default reserve if it is missing.
+	if = {
+		limit = {
+			NOT = { has_variable = afl_min_influence }
+		}
+		set_variable = {
+			name = afl_min_influence
+			value = 100
+		}
+	}
+
+	# Reset last run's diagnostics
+	if = {
+		limit = { has_variable = afl_diag_ticked }
+		remove_variable = afl_diag_ticked
+	}
+	if = {
+		limit = { has_variable = afl_diag_money_ok }
+		remove_variable = afl_diag_money_ok
+	}
+	if = {
+		limit = { has_variable = afl_diag_valid_exists }
+		remove_variable = afl_diag_valid_exists
+	}
+	if = {
+		limit = { has_variable = afl_diag_have_candidate }
+		remove_variable = afl_diag_have_candidate
+	}
+	if = {
+		limit = { has_variable = afl_diag_pact_created }
+		remove_variable = afl_diag_pact_created
+	}
+	if = {
+		limit = { has_variable = afl_diag_defunded }
+		remove_variable = afl_diag_defunded
+	}
+
+	if = {
+		limit = {
+			has_variable = afl_enabled
+			is_ai = no
+			has_dlc_feature = lobbies
+		}
+		set_variable = afl_diag_ticked
+
+		# 1) Forget tracked pacts that already broke on their own
+		#    (war, relations, rank loss, default...). Direction-explicit
+		#    check: root's own pacts with the entry as second_country (host).
+		every_in_list = {
+			variable = afl_funded_countries
+			limit = {
+				save_temporary_scope_as = afl_check_entry
+				NOT = {
+					root = {
+						any_scope_diplomatic_pact = {
+							is_diplomatic_action_type = fund_lobbies
+							second_country = scope:afl_check_entry
+						}
+					}
+				}
+			}
+			save_scope_as = afl_stale_entry
+			root = {
+				remove_list_variable = {
+					name = afl_funded_countries
+					target = scope:afl_stale_entry
+				}
+			}
+		}
+
+		# 2) Below the protected reserve: cancel the least valuable
+		#    automated pact, one per week. Manually created pacts are
+		#    never in the list, so they are never touched.
+		if = {
+			limit = { afl_below_reserve = yes }
+			ordered_in_list = {
+				variable = afl_funded_countries
+				order_by = afl_defund_priority
+				position = 0
+				save_scope_as = afl_defund_target
+				root = {
+					remove_diplomatic_pact = {
+						country = scope:afl_defund_target
+						type = fund_lobbies
+					}
+					remove_list_variable = {
+						name = afl_funded_countries
+						target = scope:afl_defund_target
+					}
+					set_variable = afl_diag_defunded
+				}
+			}
+		}
+
+		# 3) Comfortably above the reserve: fund lobbies in the best new
+		#    target, one pact per week. The pact also transfers money, so
+		#    only spend while the treasury is healthy: not defaulted, weekly
+		#    balance positive, and debt below 25% of reserves (the same
+		#    threshold at which the vanilla AI breaks these pacts). Pact
+		#    upkeep doubles at Notorious infamy, so automation pauses there.
+		else_if = {
+			limit = {
+				has_technology_researched = central_banking
+				NOT = { is_country_type = decentralized }
+				is_revolutionary = no
+				in_default = no
+				scaled_debt < 0.25
+				net_fixed_income > 0
+				infamy < 50
+			}
+			set_variable = afl_diag_money_ok
+
+			if = {
+				limit = {
+					any_country = {
+						afl_valid_fund_target = yes
+					}
+				}
+				set_variable = afl_diag_valid_exists
+			}
+			if = {
+				limit = {
+					any_country = {
+						afl_valid_fund_target = yes
+						OR = {
+							AND = {
+								country_rank >= rank_value:great_power
+								root = { afl_can_afford_great_tier = yes }
+							}
+							AND = {
+								country_rank = rank_value:major_power
+								root = { afl_can_afford_major_tier = yes }
+							}
+							AND = {
+								country_rank < rank_value:major_power
+								root = { afl_can_afford_default_tier = yes }
+							}
+						}
+					}
+				}
+				set_variable = afl_diag_have_candidate
+			}
+
+			ordered_country = {
+				limit = {
+					afl_valid_fund_target = yes
+					OR = {
+						AND = {
+							country_rank >= rank_value:great_power
+							root = { afl_can_afford_great_tier = yes }
+						}
+						AND = {
+							country_rank = rank_value:major_power
+							root = { afl_can_afford_major_tier = yes }
+						}
+						AND = {
+							country_rank < rank_value:major_power
+							root = { afl_can_afford_default_tier = yes }
+						}
+					}
+				}
+				order_by = afl_fund_target_score
+				position = 0
+				save_scope_as = afl_new_target
+				root = {
+					create_diplomatic_pact = {
+						country = scope:afl_new_target
+						type = fund_lobbies
+					}
+					# Only report success if the pact verifiably exists now;
+					# create_diplomatic_pact can no-op without any error.
+					# Direction-explicit check via root's own pact list.
+					if = {
+						limit = {
+							any_scope_diplomatic_pact = {
+								is_diplomatic_action_type = fund_lobbies
+								second_country = scope:afl_new_target
+							}
+						}
+						add_to_variable_list = {
+							name = afl_funded_countries
+							target = scope:afl_new_target
+						}
+						set_variable = afl_diag_pact_created
+						# Remember who was funded so the status line can name it
+						set_variable = {
+							name = afl_last_funded
+							value = scope:afl_new_target
+						}
+					}
+				}
+			}
+		}
+	}
+}

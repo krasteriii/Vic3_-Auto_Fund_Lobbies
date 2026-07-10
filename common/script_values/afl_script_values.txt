@@ -1,0 +1,90 @@
+﻿# Auto Fund Lobbies - script values
+#
+# Only constant values gated by triggers are used here - reading country
+# variables or numeric triggers (country_rank, influence...) as values
+# proved unreliable in this mod's contexts. All influence thresholds live
+# as constant comparisons in the scripted triggers instead.
+
+# ------------------------------------------------------------------
+# How attractive a country is as a funding target.
+# this = candidate country, root = the automating country
+# ------------------------------------------------------------------
+afl_fund_target_score = {
+	value = 0
+	if = {
+		limit = { country_rank >= rank_value:great_power }
+		add = 8
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_major_power }
+		add = 6
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_regional_power }
+		add = 4
+	}
+	else = {
+		add = 2
+	}
+	if = {
+		limit = {
+			any_political_lobby = {
+				target = root
+				OR = {
+					is_political_lobby_type = lobby_pro_country
+					is_political_lobby_type = lobby_pro_overlord
+				}
+			}
+		}
+		add = 100
+	}
+	if = {
+		limit = { is_subject_of = root }
+		add = 50
+	}
+	if = {
+		limit = { is_in_same_power_bloc = root }
+		add = 25
+	}
+}
+
+# Mirror of afl_fund_target_score with inverted sign: the least valuable
+# funded country is defunded first when influence drops below the reserve.
+afl_defund_priority = {
+	value = 0
+	if = {
+		limit = { country_rank >= rank_value:great_power }
+		subtract = 8
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_major_power }
+		subtract = 6
+	}
+	else_if = {
+		limit = { country_rank >= rank_value:unrecognized_regional_power }
+		subtract = 4
+	}
+	else = {
+		subtract = 2
+	}
+	if = {
+		limit = {
+			any_political_lobby = {
+				target = root
+				OR = {
+					is_political_lobby_type = lobby_pro_country
+					is_political_lobby_type = lobby_pro_overlord
+				}
+			}
+		}
+		subtract = 100
+	}
+	if = {
+		limit = { is_subject_of = root }
+		subtract = 50
+	}
+	if = {
+		limit = { is_in_same_power_bloc = root }
+		subtract = 25
+	}
+}
