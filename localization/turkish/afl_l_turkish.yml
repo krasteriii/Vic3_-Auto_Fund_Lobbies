@@ -21,3 +21,5 @@
  je_auto_fund_lobbies_status_nocandidate: "Otomasyon #P açık#! — şu anda fonlanabilecek uygun ülke yok."
  je_auto_fund_lobbies_status_blocked: "Otomasyon #P açık#! — duraklatıldı: hazine kötü durumda, Merkez Bankası eksik, adı çıkmışlık yüksek veya [concept_influence] rezervin altında."
  je_auto_fund_lobbies_status_notrun: "Otomasyon #P açık#! — ilk denetim bekleniyor (oyunu devam ettirin veya Şimdi Denetle'ye basın)."
+ afl_button_debug_test: "Hata Ayıklama: Pakt Testi"
+ afl_button_debug_test_desc: "Geçici tanılama: otomasyonun en iyi adayıyla bir İlişkileri Geliştir paktı ve Birmanya ile bir Lobileri Fonla paktı kurar. Ardından Diplomasi ekranını kontrol edin ve hangisinin göründüğünü bildirin."

@@ -21,3 +21,5 @@
  je_auto_fund_lobbies_status_nocandidate: "自动化#P 已启用#! — 当前没有可资助的国家。"
  je_auto_fund_lobbies_status_blocked: "自动化#P 已启用#! — 已暂停：国库状况不佳、缺少中央银行、恶名过高或[concept_influence]低于储备。"
  je_auto_fund_lobbies_status_notrun: "自动化#P 已启用#! — 等待首次检查（取消暂停或点击立即检查）。"
+ afl_button_debug_test: "调试：协定测试"
+ afl_button_debug_test_desc: "临时诊断：与自动化的最佳候选国缔结一份改善关系协定，并与缅甸缔结一份资助游说团协定。之后请查看外交界面，报告出现了哪一个。"

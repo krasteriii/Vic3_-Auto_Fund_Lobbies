@@ -21,3 +21,5 @@
  je_auto_fund_lobbies_status_nocandidate: "Automation #P enabled#! — no eligible country to fund right now."
  je_auto_fund_lobbies_status_blocked: "Automation #P enabled#! — paused: unhealthy treasury, missing Central Banking, high infamy, or [concept_influence] below the reserve."
  je_auto_fund_lobbies_status_notrun: "Automation #P enabled#! — waiting for the first check (unpause, or press Check Now)."
+ afl_button_debug_test: "Debug: Pact Test"
+ afl_button_debug_test_desc: "Temporary diagnostic: creates an Improve Relations pact with the automation's top candidate, and a Fund Lobbies pact with Burma. Check the Diplomacy panel afterwards and report which of the two appeared."

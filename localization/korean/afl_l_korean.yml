@@ -21,3 +21,5 @@
  je_auto_fund_lobbies_status_nocandidate: "자동화 #P 활성화#! — 현재 자금을 지원할 수 있는 국가가 없습니다."
  je_auto_fund_lobbies_status_blocked: "자동화 #P 활성화#! — 일시 중지: 국고 불안정, 중앙은행 미연구, 높은 악명 또는 [concept_influence] 예비량 미달."
  je_auto_fund_lobbies_status_notrun: "자동화 #P 활성화#! — 첫 검사를 기다리는 중입니다(일시정지를 해제하거나 지금 확인을 누르세요)."
+ afl_button_debug_test: "디버그: 협정 테스트"
+ afl_button_debug_test_desc: "임시 진단: 자동화의 최우선 후보와 관계 개선 협정을, 버마와 로비 자금 협정을 체결합니다. 실행 후 외교 화면을 확인하고 어느 쪽이 나타났는지 알려 주세요."
